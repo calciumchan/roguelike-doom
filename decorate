@@ -1,0 +1,3 @@
+#include "scripts/spawners"
+#include "scripts/pickups"
+#include "scripts/tools"

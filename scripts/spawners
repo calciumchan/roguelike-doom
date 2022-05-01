@@ -1,0 +1,123 @@
+//------------------------------------------------------------------------------LIGHT MONSTERS
+actor rlse_light_l1 8601{
+	//$Category "RLD/enemies/light"
+	//$color 19
+	height 64
+	radius 32
+	states{
+		spawn:
+			tnt1 a 0
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_enemy_light",0,0)
+			tnt1 a 1
+			stop
+	}
+}
+
+actor rlse_light_l5 8602{
+	//$Category "RLD/enemies/light"
+	//$color 12
+	height 64
+	radius 32
+	states{
+		spawn:
+			tnt1 a 0
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_enemy_light",0,4)
+			tnt1 a 1
+			stop
+	}
+}
+
+actor rlse_light_l10 8603{
+	//$Category "RLD/enemies/light"
+	//$color 4
+	height 64
+	radius 32
+	states{
+		spawn:
+			tnt1 a 0
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_enemy_light",0,9)
+			tnt1 a 1
+			stop
+	}
+}
+
+
+//------------------------------------------------------------------------------HEAVY MONSTERS
+actor rlse_heavy_l1 8604{
+	//$Category "RLD/enemies/heavy"
+	//$color 19
+	height 64
+	radius 64
+	states{
+		spawn:
+			tnt1 a 0
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_enemy_heavy",0,0)
+			tnt1 a 1
+			stop
+	}
+}
+
+actor rlse_heavy_l5 8605{
+	//$Category "RLD/enemies/heavy"
+	//$color 12
+	height 64
+	radius 64
+	states{
+		spawn:
+			tnt1 a 0
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_enemy_heavy",0,4)
+			tnt1 a 1
+			stop
+	}
+}
+
+actor rlse_heavy_l10 8606{
+	//$Category "RLD/enemies/heavy"
+	//$color 4
+	height 64
+	radius 64
+	states{
+		spawn:
+			tnt1 a 0
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_enemy_heavy",0,9)
+			tnt1 a 1
+			stop
+	}
+}
+
+//------------------------------------------------------------------------------SPECIAL MONSTERS
+actor rlse_miniboss 8650{
+	//$Category "RLD/enemies/boss"
+	//$color 13
+	height 64
+	radius 32
+	states{
+		spawn:
+			tnt1 a 0
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_enemy_miniboss",0)
+			tnt1 a 1
+			stop
+	}
+}
+
+actor rlse_boss 8651{
+	//$Category "RLD/enemies/boss"
+	//$color 5
+	height 128
+	radius 128
+	states{
+		spawn:
+			tnt1 a 0
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_enemy_boss",0)
+			tnt1 a 1
+			stop
+	}
+}
+
+
+
+
+
+
+
+

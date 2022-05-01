@@ -1,0 +1,39 @@
+actor rlsp_small 6601{
+	//category "RLD/pickup"
+	//$notangled
+	//$color 3
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_pickup_small",0)
+			tnt1 a 5
+			stop
+	}
+}
+
+actor rlsp_large 6602{
+	//category "RLD/pickup"
+	//$notangled
+	//$color 9
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_pickup_large",0)
+			tnt1 a 5
+			stop
+	}
+}
+
+actor rlsp_late{
+	//$color 3
+}
+
+actor rlsp_weapon 6603{
+	//category "RLD/pickup"
+	//$notangled
+	//$color 17
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_weapon",0)
+			tnt1 a 5
+			stop
+	}
+}

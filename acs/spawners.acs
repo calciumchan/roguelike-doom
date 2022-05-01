@@ -1,0 +1,188 @@
+#library "spawners"
+#include "zcommon.acs"
+
+global int 24:rldata[];
+
+function int min (int a, int b){
+	if (a < b)
+		return a;
+	return b;
+}
+
+function int max (int a, int b){
+	if (a > b)
+		return a;
+	return b;
+} 
+
+//------------------------------------------------------------------------------ENEMY LIGHT
+script "rl_spawn_enemy_light" (int level){
+	if(rldata[21] >= level || gameskill()>=3 && random(0,5)==0){
+		level = rldata[21]-level;
+		str to_spawn;
+		int randmax;
+		
+		if(level >= 19){randmax = 4;
+		}else if(level >= 9){randmax = 3;
+		}else if(level >= 4){randmax = 2;
+		}else{randmax = 1;}
+		
+		switch(random(0,randmax)){
+			case 0: to_spawn = "zombieman";break;
+			case 1: to_spawn = "doomimp";break;
+			case 2: to_spawn = "shotgunguy";break;
+			case 3: to_spawn = "chaingunguy";break;
+			case 4: to_spawn = "wolfensteinSS";break;
+		}
+		
+		if(level >= 19 && to_spawn != "wolfensteinSS" && random(0,10) == 0){
+			to_spawn = strparam(s:"stealth",s:to_spawn);
+		}
+		
+		spawnforced(to_spawn,getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+	}
+}
+
+//------------------------------------------------------------------------------ENEMY HEAVY
+script "rl_spawn_enemy_heavy" (int level){
+	if(rldata[21] >= level || gameskill()>=3 && random(0,10)==0){
+		level = rldata[21]-level;
+		str to_spawn;
+		int randmax;
+		
+		if(level >= 9){randmax = 6;
+		}else if(level >= 7){randmax = 5;
+		}else if(level >= 5){randmax = 4;
+		}else if(level >= 3){randmax = 3;
+		}else if(level >= 1){randmax = 2;
+		}else{randmax = 0;}
+		
+		switch(random(0,randmax)){
+			case 0: to_spawn = "demon";break;
+			case 1: to_spawn = "hellknight";break;
+			case 2: to_spawn = "cacodemon";break;
+			case 3: to_spawn = "arachnotron";break;
+			case 4: to_spawn = "painelemental";break;
+			case 5: to_spawn = "fatso";break;
+			case 6: to_spawn = "spectre";break;
+		}
+		
+		if(rldata[21] >= 29 && to_spawn!= "spectre" && to_spawn!="painelemental" && random(0,20) == 0){
+			to_spawn = strparam(s:"stealth",s:to_spawn);
+		}
+		
+		spawnforced(to_spawn,getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+	}
+}
+
+//------------------------------------------------------------------------------ENEMY BOSS
+script "rl_spawn_enemy_miniboss" (void){
+	if(rldata[21] >= 1 && random(0,10) == 0 || rldata[21] >= 9 || gameskill()>=2 && rldata[21] >= 4){
+		if(random(0,1) == 0){
+			spawnforced("archvile",getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+		}else{
+			spawnforced("baronofhell",getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+		}
+	}else if(gameskill() >= 4 && rldata[21] >= 1 ){
+		spawnforced("baronofhell",getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+	}
+}
+
+
+script "rl_spawn_enemy_boss" (void){
+	if(rldata[21] >= 4 && random(0,20) == 0 || rldata[21] >= 9 && random(0,10) == 0 || rldata[21] >= 19 || gameskill()>=4 && rldata[21] >= 9){
+		int randmax = 1;
+		switch(random(0,randmax)){
+			case 0:
+				spawnforced("cyberdemon",getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+				break;
+			case 1:
+				spawnforced("spidermastermind",getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+				break;
+				
+		}
+	}
+}
+
+//------------------------------------------------------------------------------PICKUP
+script "rl_spawn_pickup_small" (void){
+	int randmax = 2;
+	str to_spawn;
+	if(rldata[21] > 10){randmax = 7;
+	}else if(rldata[21] >= 9){randmax = 6;
+	}else if(rldata[21] >= 4){randmax = 4;
+	}else if(rldata[21] >= 1){randmax = 3;}
+	
+	switch(random(0,randmax)){
+		case 0: to_spawn = "healthbonus";break;
+		case 1: to_spawn = "armorbonus";break;
+		case 2: to_spawn = "clip";break;
+		case 3: to_spawn = "shell";break;
+		case 4: to_spawn = "stimpack";break;
+		case 5: to_spawn = "cell";break;
+		case 6: to_spawn = "rocketammo";break;
+	}
+	
+	spawnforced(to_spawn,getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+}
+
+script "rl_spawn_pickup_large" (void){
+	//str choices[9] = {"medikit","greenarmor","clipbox","shellbox","rocketbox","cellpack","bluearmor","soulsphere","backpack"};
+	//spawnforced(choices[random(0,min(8,rldata[21]))],getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+	
+	if(gameskill() >= 4 && random(0,10) == 0){
+		spawnforced("stimpack",getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+	}else{
+		int randmax = 0;
+		str to_spawn;
+		if(rldata[21] > 10){randmax = 7;
+		}else if(rldata[21] >= 9){randmax = 6;
+		}else if(rldata[21] >= 4){randmax = 4;
+		}else if(rldata[21] >= 2){randmax = 1;}
+		
+		switch(random(0,randmax)){
+			case 0: to_spawn = "medikit";break;
+			case 1: to_spawn = "greenarmor";break;
+			case 2: to_spawn = "clipbox";break;
+			case 3: to_spawn = "shellbox";break;
+			case 4: to_spawn = "rocketbox";break;
+			case 5: to_spawn = "cellpack";break;
+			case 6: to_spawn = "bluearmor";break;
+			case 7: to_spawn = "soulsphere";break;
+			case 8: to_spawn = "backpack";break;
+		}
+		
+		spawnforced(to_spawn,getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+	}
+}
+//------------------------------------------------------------------------------WEAPON
+script "rl_spawn_weapon" (void){
+	int randmax = 1;
+	str to_spawn;
+	if(rldata[21] >= 9){randmax = 7;
+	}else if(rldata[21] >= 4){randmax = 5;
+	}else if(rldata[21] >= 1){randmax = 4;
+	}else if(rldata[21] >= 0){randmax = 3;}
+	
+	switch(random(0,randmax)){
+		case 0: to_spawn = "pistol";break;
+		case 1: to_spawn = "shotgun";break;
+		case 2: to_spawn = "chainsaw";break;
+		case 3: to_spawn = "supershotgun";break;
+		case 4: to_spawn = "chaingun";break;
+		case 5: to_spawn = "rocketlauncher";break;
+		case 6: to_spawn = "plasmarifle";break;
+		case 7: to_spawn = "bfg9000";break;
+	}
+	spawnforced(to_spawn,getactorx(0),getactory(0),getactorz(0),0,getactorangle(0)>>8);
+}
+
+//------------------------------------------------------------------------------WEAPON
+script "rl_spawn_weather" (void){
+	int spawnx = getactorx(0);
+	int spawny = getactory(0);
+	int spawnz = getactorz(0);
+	if(checkactorceilingtexture(0,"f_sky1")){
+		spawnforced("rl_weather_rain",spawnx,spawny,spawnz);
+	}
+}

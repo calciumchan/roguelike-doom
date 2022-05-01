@@ -1,0 +1,27 @@
+gamedefaults{
+	NoIntermission
+	AllowRespawn 
+}
+
+episode rldstart{
+	name = "Roguelike DOOM"
+}
+
+//SPECIAL MAPS
+map rldstart "Roguelike DOOM start"{}
+
+//FLOOR MAPS
+map rlm00000 "RLDM"{}
+map rlm00001 "RLDM"{}
+map rlm00002 "RLDM"{}
+map rlm00003 "RLDM"{}
+map rlm00004 "RLDM"{}
+map rlm00005 "RLDM"{}
+map rlm00006 "RLDM"{}
+map rlm00007 "RLDM"{}
+map rlm00008 "RLDM"{}
+map rlm00009 "RLDM"{}
+
+
+
+//BOSS MAPS

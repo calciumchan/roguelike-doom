@@ -1,0 +1,29 @@
+#library "tools"
+#include "zcommon.acs"
+
+global int 24:rldata[];
+
+script "rl_tool_wallcloser" (int sectorid, int chance){
+	if(random(0, chance) != 0 && chance != 0 || chance == -1){
+		ceiling_lowertofloor(sectorid,999);
+	}
+}
+
+script "rl_tool_wallcloser_path" (int sectorid, int sectorid2){
+	if(random(0, 1) == 0){
+		ceiling_lowertofloor(sectorid,999);
+	}else{
+		ceiling_lowertofloor(sectorid2,999);
+	}
+}
+
+script "rl_tool_floorraiser" (int sectorid, int chance, int raise){
+	if(random(0, chance) == 0 || chance == 0){
+		floor_raisebyvalue(sectorid,999,raise);
+	}
+}
+script "rl_tool_floorlower" (int sectorid, int chance, int lower){
+	if(random(0, chance) == 0 || chance == 0){
+		floor_lowerbyvalue(sectorid,999,lower);
+	}
+}

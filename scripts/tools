@@ -1,0 +1,149 @@
+actor rl_level_ender : custominventory 6789{
+	//$NotAngled
+	//$arg0 LEVELS TO JUMP
+	+floatbob
+	states{
+		spawn:
+			pins a 1 bright
+			loop
+		pickup:
+			tnt1 a 0 
+			tnt1 a 0 acs_namedexecutealways("rl_end",0,0)
+			tnt1 a 5
+			stop
+	}
+}
+
+actor rl_level_holding_chamber 6790{
+	//$NotAngled
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_holding_chamber",0,args[0],args[1])
+			tnt1 a 5
+			stop
+	}
+}
+
+actor rl_level_deathcam 6791{
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_make_deathcam",0,args[0],args[1])
+			tnt1 a 5
+			stop
+	}
+}
+
+actor rl_wallcloser_random 7701{
+	//$arg0 SECTOR ID
+	//$arg1 CHANCE
+	//$Category "RLD/tools"
+	//$NotAngled
+	//$color 14
+	//$arg0type 13
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_tool_wallcloser",0,args[0],args[1])
+			stop
+	}
+}
+
+actor rl_wallcloser_path 7702{
+	//$arg0 SECTOR ID
+	//$arg1 SECTOR ID 2
+	//$Category "RLD/tools"
+	//$NotAngled
+	//$color 14
+	//$arg0type 13
+	//$arg1type 13
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_tool_wallcloser_path",0,args[0],args[1])
+			stop
+	}
+}
+
+actor rl_floorraiser_random 7711{
+	//$arg0 SECTOR ID
+	//$arg1 CHANCE
+	//$arg2 RAISE AMOUNT
+	//$Category "RLD/tools"
+	//$NotAngled
+	//$color 14
+	//$arg0type 13
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_tool_floorraiser",0,args[0],args[1],args[2])
+			stop
+	}
+}
+
+actor rl_floorlower_random 7712{
+	//$arg0 SECTOR ID
+	//$arg1 CHANCE
+	//$arg2 LOWER AMOUNT
+	//$Category "RLD/tools"
+	//$NotAngled
+	//$color 14
+	//$arg0type 13
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_tool_floorlower",0,args[0],args[1],args[2])
+			stop
+			
+	}
+}
+
+actor rl_level_bounds 7690{
+	//$arg0 WIDTH
+	//$arg1 HEIGHT
+	//$notangled
+	//$color 10
+	radius 1
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_level_bounds",0,args[0],args[1])
+		spawnloop:
+			tnt1 a 1
+			loop
+			
+	}
+}
+
+actor RL_TESTSPOT{
+	+nogravity
+	states{
+		spawn:
+			clip A -1
+			stop
+	}
+}
+
+actor rl_weather_spawner{
+	+nogravity
+	states{
+		spawn:
+			tnt1 a 0 nodelay acs_namedexecutealways("rl_spawn_weather",0,args[0],args[1])
+			tnt1 a 3
+			stop
+	}
+}
+
+actor rl_weather_rain{
+	+spawnceiling
+	+nogravity
+	states{
+		spawn:
+			tnt1 a 0
+			tnt1 a 0 a_changevelocity(0,0,frandom(-100,-50),cvf_replace)
+			tnt1 a 0 a_setscale(frandom(-2,2),velz*-1)
+			tnt1 a 0 a_fadeout(frandom(0,0.5))
+		spawnloop:
+			rlda a 1 bright
+			tnt1 a 0 a_jumpif(velz == 0, "death")
+			loop
+		death:
+			rlda a 1 bright
+			tnt1 a 0
+			stop
+	}
+}
